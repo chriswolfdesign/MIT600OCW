@@ -9,15 +9,6 @@ interest_rate = float(raw_input \
 payment_rate = float(raw_input \
     ("Enter the minimum monthly payment rate as a decimal: "))
 
-"""
-Debug
-"""
-print "Balance:", round(balance, 2)
-print "Interest Rate:", interest_rate
-print "Payment Rate:", payment_rate
-"""
-End Debug
-"""
 
 total_paid = 0.0
 
