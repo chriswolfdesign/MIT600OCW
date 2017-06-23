@@ -64,19 +64,12 @@ def compute_root(poly, x_0, epsilon):
     epsilon: float > 0
     returns: tuple (float, int)
     """
-    # TODO
+    guess = x_0
+    iterations = 0
 
-"""
-Debug
-"""
-if __name__ == '__main__':
-    # Check Problem 1
-    poly = (0.0, 0.0, 5.0, 9.3, 7.0)
-    print evaluate_poly(poly, -13)
+    while abs(evaluate_poly(poly, guess)) > epsilon:
+        guess = guess - evaluate_poly(poly, guess) / \
+            evaluate_poly(compute_deriv(poly), guess)
+        iterations += 1
 
-    # Check Problem 2
-    poly = (13.39, 0.0, 17.5, 3.0, 1.0)
-    print compute_deriv(poly)
-"""
-End Debug
-"""
+    return (guess, iterations)
