@@ -1,5 +1,8 @@
 # 6.00 Problem Set 2
-#
+# Name: Chris Wolf
+# E-mail: chriswolfdesign@gmail.com
+# Time: 1:30
+# 
 # Successive Approximation
 #
 

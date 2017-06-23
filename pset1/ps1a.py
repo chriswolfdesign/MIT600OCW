@@ -1,4 +1,4 @@
-# Problem Set 1
+# 6.00 Problem Set 1
 # Name: Chris Wolf
 # E-mail: chriswolfdesign@gmail.com
 # Time: 0:30
