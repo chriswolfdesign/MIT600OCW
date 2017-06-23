@@ -37,7 +37,12 @@ def compute_deriv(poly):
     poly: tuple of numbers, length > 0
     returns: tuple of numbers
     """
-    # TO DO ...
+    solution = [0.0]
+
+    for exponent in range(2, len(poly)):
+        solution.append(poly[exponent] * exponent)
+
+    return solution
 
 def compute_root(poly, x_0, epsilon):
     """
@@ -59,14 +64,19 @@ def compute_root(poly, x_0, epsilon):
     epsilon: float > 0
     returns: tuple (float, int)
     """
-    # TO DO ...
+    # TODO
 
 """
 Debug
 """
 if __name__ == '__main__':
+    # Check Problem 1
     poly = (0.0, 0.0, 5.0, 9.3, 7.0)
     print evaluate_poly(poly, -13)
+
+    # Check Problem 2
+    poly = (13.39, 0.0, 17.5, 3.0, 1.0)
+    print compute_deriv(poly)
 """
 End Debug
 """
