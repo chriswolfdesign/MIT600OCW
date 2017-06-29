@@ -29,8 +29,8 @@ def comp_play_hand(hand, word_list):
 
      * The computer chooses a word using comp_choose_words(hand, word_dict).
 
-     * After every valid word: the score for that word is displayed, 
-       the remaining letters in the hand are displayed, and the computer 
+     * After every valid word: the score for that word is displayed,
+       the remaining letters in the hand are displayed, and the computer
        chooses another word.
 
      * The sum of the word scores is displayed when the hand finishes.
@@ -40,8 +40,8 @@ def comp_play_hand(hand, word_list):
      hand: dictionary (string -> int)
      word_list: list (string)
     """
-    # TO DO ...    
-    
+    # TO DO ...
+
 #
 # Problem #6C: Playing a game
 #
@@ -65,12 +65,10 @@ def play_game(word_list):
     word_list: list (string)
     """
     # TO DO...
-        
+
 #
 # Build data structures used for entire session and play game
 #
 if __name__ == '__main__':
     word_list = load_words()
     play_game(word_list)
-
-    

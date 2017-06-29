@@ -13,7 +13,7 @@ def xuniqueCombinations(items, n):
         for i in xrange(len(items)):
             for cc in xuniqueCombinations(items[i+1:],n-1):
                 yield [items[i]]+cc
-            
+
 def xselections(items, n):
     if n==0: yield []
     else:
@@ -29,14 +29,14 @@ def get_perms(hand, n):
     for key in hand:
 	for i in range(hand[key]):
 	    handlist.append(key)
-    l = [] 
+    l = []
     toret = []
     for c in xuniqueCombinations(handlist,n):
 	l.append(c)
     for j in l:
         for p in xpermutations(j):
             toret.append("".join(p))
-    return toret	
+    return toret
 
 if __name__=="__main__":
     print "Permutations of 'love'"
