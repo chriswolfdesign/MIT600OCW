@@ -263,8 +263,10 @@ def play_hand(hand, word_list):
             clone_hand = update_hand(clone_hand, word)
             print '"{}" earned {} points. Total: {}'.format\
                 (word, this_score, score)
+            print
         else:
             print '"{}" is not a valid word.  Please try again.'.format(word)
+            print
 
 #
 # Problem #5: Playing a game
@@ -286,7 +288,53 @@ def play_game(word_list):
     * If the user inputs anything else, ask them again.
     """
     hand = deal_hand(HAND_SIZE)
-    play_hand(hand, word_list)
+    word = ''
+
+    while not word == 'e':
+        score = 0
+
+        clone_hand = {}
+        for letter in hand:
+            clone_hand[letter] = hand[letter]
+
+        while True:
+            print 'Current hand: ',
+            display_hand(clone_hand)
+            word = raw_input('Enter word to play, "n" to restart with ' + \
+                'a new hand "r" to restart with the same hand, or ' + \
+                '"e" to quit the game: ')
+
+            # If player requests new hand
+            if word == 'n':
+                print
+                print 'Total score: {}'.format(score)
+                hand = deal_hand(HAND_SIZE)
+                break
+
+            # If player requests redo with the same hand
+            if word == 'r':
+                print
+                print 'Total score: {}'.format(score)
+                break
+
+            # If player wants to exit the game
+            if word == 'e':
+                print
+                print 'Total score: {}'.format(score)
+                break
+
+            if is_valid_word(word, clone_hand, word_list):
+                this_score = get_word_score(word, HAND_SIZE)
+                score += this_score
+                clone_hand = update_hand(clone_hand, word)
+                print '"{}" earned {} points. Total: {}'.format\
+                    (word, this_score, score)
+                print
+            else:
+                print '"{}" is not a valid word.  Please try again.'\
+                    .format(word)
+                print
+
 
 #
 # Build data structures used for entire session and play game
