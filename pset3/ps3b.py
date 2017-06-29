@@ -16,7 +16,23 @@ def comp_choose_word(hand, word_list):
     hand: dictionary (string -> int)
     word_list: list (string)
     """
-    # TO DO...
+    possible_words = []
+    for i in range(calculate_handlen(hand) + 1):
+        possible_words = possible_words + get_perms(hand, i)
+
+    # Remove duplicates from possible_words
+    possible_words = list(set(possible_words))
+
+    best_score = 0
+    best_word = ''
+
+    for word in possible_words:
+        # If this is the best word we have found so far, update our variables
+        if word in word_list and get_word_score(word, HAND_SIZE) > best_score:
+            best_score = get_word_score(word, HAND_SIZE)
+            best_word = word
+
+    return best_word
 
 #
 # Problem #6B: Computer plays a hand
@@ -72,3 +88,6 @@ def play_game(word_list):
 if __name__ == '__main__':
     word_list = load_words()
     play_game(word_list)
+    hand = {'a' : 1, 'b' : 2, 'c' : 1, 'd' : 1, 'e' : 2}
+    word = comp_choose_word(hand, word_list)
+    print word, get_word_score(word, HAND_SIZE)
