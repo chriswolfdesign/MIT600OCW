@@ -152,7 +152,22 @@ def update_hand(hand, word):
     hand: dictionary (string -> int)
     returns: dictionary (string -> int)
     """
-    # TO DO ...
+    # Clone the hand into a new variable
+    new_hand = {}
+    for letter in hand:
+        new_hand[letter] = hand[letter]
+
+    # Remove letters in word from our new hand
+    for letter in word:
+        new_hand[letter] = new_hand.get(letter, 0) - 1
+
+    # Clean up the empty keys in our new hand
+    clean_hand = {}
+    for letter in new_hand:
+        if new_hand[letter] > 0:
+            clean_hand[letter] = new_hand[letter]
+
+    return clean_hand
 
 #
 # Problem #3: Test word validity
