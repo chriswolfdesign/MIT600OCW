@@ -252,7 +252,7 @@ def play_hand(hand, word_list):
         word = raw_input\
             ('Enter word, or a "." to indicate that you are finished: ')
 
-        if word == '.':
+        if word == '.' or calculate_handlen(clone_hand) < 1:
             print
             print 'Total score: {}'.format(score)
             break

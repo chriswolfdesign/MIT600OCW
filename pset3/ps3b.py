@@ -38,7 +38,7 @@ def comp_choose_word(hand, word_list):
     possible_words = remove_duplicates(possible_words)
 
     best_score = 0
-    best_word = ''
+    best_word = '.'
 
     for word in possible_words:
         # If this is the best word we have found so far, update our variables
@@ -70,7 +70,31 @@ def comp_play_hand(hand, word_list):
      hand: dictionary (string -> int)
      word_list: list (string)
     """
-    # TO DO ...
+    score = 0
+
+    # Clone the hand so the original can still be used later
+    clone_hand = {}
+    for letter in hand:
+        clone_hand[letter] = hand[letter]
+
+    while True:
+        print 'Current hand: ',
+        display_hand(clone_hand)
+        print 'Enter a word, or a "." to indicate that you are finished: ',
+        word = comp_choose_word(clone_hand, word_list)
+        print word
+
+        if word == '.' or calculate_handlen(clone_hand) < 1:
+            print 'Total score: {}'.format(score)
+            print
+            break
+
+        this_score = get_word_score(word, HAND_SIZE)
+        score += this_score
+        clone_hand = update_hand(clone_hand, word)
+        print '"{}" earned {} points. Total score: {}'.format\
+            (word, this_score, score)
+        print
 
 #
 # Problem #6C: Playing a game
@@ -102,12 +126,5 @@ def play_game(word_list):
 if __name__ == '__main__':
     word_list = load_words()
     play_game(word_list)
-    hand = {'a' : 1, 'b' : 2, 'c' : 1, 'd' : 1, 'e' : 2}
-    """
-    Debug
-    """
-    word = comp_choose_word(hand, word_list)
-    print word, get_word_score(word, HAND_SIZE)
-    """
-    End Debug
-    """
+    hand = deal_hand(HAND_SIZE)
+    comp_play_hand(hand, word_list)
