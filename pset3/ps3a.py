@@ -236,30 +236,35 @@ def play_hand(hand, word_list):
     """
     score = 0
 
+    # Clone the hand so we can use the original again for another hand
+    clone_hand = {}
+    for letter in hand:
+        clone_hand[letter] = hand[letter]
+
     while True:
-        if len(hand) < 1:
+        if len(clone_hand) < 1:
             print
             print 'Total score: {}'.format(score)
             break
 
         print 'Current hand:',
-        display_hand(hand)
+        display_hand(clone_hand)
         word = raw_input\
-            ('Enter word, or a \".\" to indicate that you are finished: ')
+            ('Enter word, or a "." to indicate that you are finished: ')
 
         if word == '.':
             print
             print 'Total score: {}'.format(score)
             break
 
-        if is_valid_word(word, hand, word_list):
+        if is_valid_word(word, clone_hand, word_list):
             this_score = get_word_score(word, HAND_SIZE)
             score += this_score
-            hand = update_hand(hand, word)
-            print '\"{}\" earned {} points. Total: {}'.format\
+            clone_hand = update_hand(clone_hand, word)
+            print '"{}" earned {} points. Total: {}'.format\
                 (word, this_score, score)
         else:
-            print '\"{}\" is not a valid word.  Please try again.'.format(word)
+            print '"{}" is not a valid word.  Please try again.'.format(word)
 
 #
 # Problem #5: Playing a game
