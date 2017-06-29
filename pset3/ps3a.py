@@ -234,7 +234,32 @@ def play_hand(hand, word_list):
       word_list: list of lowercase strings
 
     """
-    # TO DO ...
+    score = 0
+
+    while True:
+        if len(hand) < 1:
+            print
+            print 'Total score: {}'.format(score)
+            break
+
+        print 'Current hand:',
+        display_hand(hand)
+        word = raw_input\
+            ('Enter word, or a \".\" to indicate that you are finished: ')
+
+        if word == '.':
+            print
+            print 'Total score: {}'.format(score)
+            break
+
+        if is_valid_word(word, hand, word_list):
+            this_score = get_word_score(word, HAND_SIZE)
+            score += this_score
+            hand = update_hand(hand, word)
+            print '\"{}\" earned {} points. Total: {}'.format\
+                (word, this_score, score)
+        else:
+            print '\"{}\" is not a valid word.  Please try again.'.format(word)
 
 #
 # Problem #5: Playing a game
@@ -255,7 +280,8 @@ def play_game(word_list):
 
     * If the user inputs anything else, ask them again.
     """
-    # TO DO...
+    hand = deal_hand(HAND_SIZE)
+    play_hand(hand, word_list)
 
 #
 # Build data structures used for entire session and play game
