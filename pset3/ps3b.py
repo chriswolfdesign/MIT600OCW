@@ -78,13 +78,18 @@ def comp_play_hand(hand, word_list):
         clone_hand[letter] = hand[letter]
 
     while True:
+        if calculate_handlen(clone_hand) < 1:
+            print 'Total score {}'.format(score)
+            print
+            break
+
         print 'Current hand: ',
         display_hand(clone_hand)
         print 'Enter a word, or a "." to indicate that you are finished: ',
         word = comp_choose_word(clone_hand, word_list)
         print word
 
-        if word == '.' or calculate_handlen(clone_hand) < 1:
+        if word == '.':
             print 'Total score: {}'.format(score)
             print
             break
@@ -118,13 +123,31 @@ def play_game(word_list):
 
     word_list: list (string)
     """
-    # TO DO...
+    hand = deal_hand(HAND_SIZE)
+    choice = ' '
+    while not choice == 'e':
+        choice = ' '
+        player = ' '
+        while not (player == 'u' or player == 'c'):
+            player = raw_input('Who would you like to play the next hand ' + \
+                '(u: user, c: computer)? ')
+
+        if player == 'c':
+            comp_play_hand(hand, word_list)
+        elif player == 'u':
+            play_hand(hand, word_list)
+
+        while not (choice == 'r' or choice == 'n' or choice == 'e'):
+            choice = raw_input('Would you like to keep playing ' + \
+                '(n: new hand, r: replay your last hand, e: exit game)? ')
+
+        if choice == 'n':
+            hand = deal_hand(HAND_SIZE)
 
 #
 # Build data structures used for entire session and play game
 #
 if __name__ == '__main__':
     word_list = load_words()
-    play_game(word_list)
     hand = deal_hand(HAND_SIZE)
-    comp_play_hand(hand, word_list)
+    play_game(word_list)

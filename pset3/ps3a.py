@@ -1,8 +1,9 @@
 # 6.00 Problem Set 3A Solutions
-#
+# Name: Chris Wolf
+# E-mail: chriswolfdesign@gmail.com
+# Time: 3:30
 # The 6.00 Word Game
 # Created by: Kevin Luu <luuk> and Jenna Wiens <jwiens>
-#
 #
 
 import random
@@ -242,7 +243,7 @@ def play_hand(hand, word_list):
         clone_hand[letter] = hand[letter]
 
     while True:
-        if len(clone_hand) < 1:
+        if calculate_handlen(clone_hand) < 1:
             print
             print 'Total score: {}'.format(score)
             break
@@ -253,8 +254,8 @@ def play_hand(hand, word_list):
             ('Enter word, or a "." to indicate that you are finished: ')
 
         if word == '.' or calculate_handlen(clone_hand) < 1:
-            print
             print 'Total score: {}'.format(score)
+            print
             break
 
         if is_valid_word(word, clone_hand, word_list):
@@ -294,11 +295,7 @@ def play_game(word_list):
         choice = ' '
         score = 0
 
-        clone_hand = {}
-        for letter in hand:
-            clone_hand[letter] = hand[letter]
-
-        play_hand(clone_hand, word_list)
+        play_hand(hand, word_list)
         while not (choice == 'r' or choice == 'n' or choice == 'e'):
             choice = raw_input('Would you like to keep playing ' + \
                 '(n: new hand, r: replay your last hand, e: quit game)? ')
