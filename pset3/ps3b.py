@@ -2,6 +2,21 @@ from ps3a import *
 import time
 from perm import *
 
+def remove_duplicates(list):
+    """
+    Takes in a list and returns a new copy of the list, removing
+    any duplicates
+
+    list: The list we hope to remove duplicates from
+    returns: a list with all duplicates removed
+    """
+    new_list = []
+
+    for item in list:
+        if not item in new_list:
+            new_list.append(item)
+
+    return new_list
 
 #
 #
@@ -20,8 +35,7 @@ def comp_choose_word(hand, word_list):
     for i in range(calculate_handlen(hand) + 1):
         possible_words = possible_words + get_perms(hand, i)
 
-    # Remove duplicates from possible_words
-    possible_words = list(set(possible_words))
+    possible_words = remove_duplicates(possible_words)
 
     best_score = 0
     best_word = ''
@@ -89,5 +103,11 @@ if __name__ == '__main__':
     word_list = load_words()
     play_game(word_list)
     hand = {'a' : 1, 'b' : 2, 'c' : 1, 'd' : 1, 'e' : 2}
+    """
+    Debug
+    """
     word = comp_choose_word(hand, word_list)
     print word, get_word_score(word, HAND_SIZE)
+    """
+    End Debug
+    """
