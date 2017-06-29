@@ -182,7 +182,20 @@ def is_valid_word(word, hand, word_list):
     hand: dictionary (string -> int)
     word_list: list of lowercase strings
     """
-    # TO DO...
+    # Innocent until proven guilty strategy
+    is_word = True
+
+    # If word is not in the English language
+    if not word in word_list:
+        return False
+
+    # If the hand does not contain sufficient letters for the word
+    word_dict = get_frequency_dict(word)
+    for letter in word_dict:
+        if word_dict[letter] > hand.get(letter, 0):
+            return False
+
+    return True
 
 def calculate_handlen(hand):
     handlen = 0
