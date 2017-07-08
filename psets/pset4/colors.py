@@ -45,3 +45,12 @@ return: The string converted to the color black.
 """
 def black(string):
 	return '\033[98m{}\033[0m'.format(string)
+
+"""
+purple(string)
+
+string : The string you wish to conver to a purple font.
+return: The string converted to the color purple.
+"""
+def purple(string):
+	return '\033[95m{}\033[0m'.format(string)

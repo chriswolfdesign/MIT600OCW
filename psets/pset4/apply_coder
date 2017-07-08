@@ -223,17 +223,20 @@ def apply_coder(text, coder):
 	new_text = ''
 	old_text = text[:]
 	keys = coder.keys()
+	temp = ''
 	for letter in old_text:
 		is_upper = False
 		if letter.isupper():
 			is_upper = True
-			letter = letter.lower()
-		
+			temp = letter.lower()
+		else:
+			temp = letter
+
 		if letter in keys:
-			temp = coder[letter]
+			temp = coder[temp]
 
 			if is_upper:
-				temp = temp.upper()
+				temp.upper()
 
 			new_text += temp
 		else:
@@ -258,8 +261,8 @@ def apply_shift(text, shift):
 	>>> apply_shift('This is a test.', 8)
 	'Apq hq hiham a.'
 	"""
-	return apply_coder(text, build_encoder(shift))
-
+	### TODO.
+   
 #
 # Problem 2: Codebreaking.
 #
