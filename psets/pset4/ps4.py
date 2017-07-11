@@ -1,7 +1,7 @@
 # 6.00 Problem Set 4
 #
 # Caesar Cipher Skeleton
-#
+
 import string
 import random
 
@@ -279,8 +279,23 @@ def find_best_shift(wordlist, text):
 	>>> apply_coder(s, build_decoder(8)) returns
 	'Hello, world!'
 	"""
-	### TODO
-   
+	max_real_words = 0
+	best_shift     = 0
+
+	for number in range(CHARACTERS):
+		new_text = apply_coder(text, build_decoder(number))
+		new_words = new_text.split()
+
+		word_count = 0
+		for word in new_words:
+			if is_word(wordlist, word):
+				word_count += 1
+
+			if word_count > max_real_words:
+				max_real_words = word_count
+				best_shift = number
+	
+	return best_shift
 #
 # Problem 3: Multi-level encryption.
 #
@@ -300,8 +315,14 @@ def apply_shifts(text, shifts):
 	>>> apply_shifts("Do Androids Dream of Electric Sheep?", [(0,6), (3, 18), (12, 16)])
 	'JufYkaolfapxQdrnzmasmRyrpfdvpmEurrb?'
 	"""
-	### TODO.
- 
+	new_text = text[:]
+
+	for shift in shifts:
+		new_text = new_text[:shift[0]] + \
+			apply_shift(new_text[shift[0]:], shift[1])
+	
+	return new_text
+
 #
 # Problem 4: Multi-level decryption.
 #

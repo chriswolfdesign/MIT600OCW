@@ -507,6 +507,82 @@ def test_apply_shift():
 		fail(function_call, expected_result, received_result)
 
 
+def test_find_best_shift():
+	
+	# find_best_shift(wordlist, apply_coder('Hello, world!', 5))	
+	function_call = 'find_best_shift(wordlist, apply_shift(' + \
+		'\'Hello, world!\', 5))'
+	expected_result = 5
+	received_result = find_best_shift(wordlist, \
+		apply_shift('Hello, world!', 5))
+
+	if expected_result == received_result:
+		success(function_call)
+	else:
+		fail(function_call, expected_result, received_result)
+
+	# find_best_shift(wordlist, apply_coder('I like Computer Science!', 12))
+	function_call = 'find_best_shift(wordlist, apply_shift(' + \
+		'\'I like Computer Science!\', 12))'
+	expected_result = 12
+	received_result = find_best_shift(wordlist, \
+		apply_shift('I like Computer Science!', 12))
+	
+	if expected_result == received_result:
+		success(function_call)
+	else:
+		fail(function_call, expected_result, received_result)
+
+	# find_best_shift(wordlist, apply_coder('Prgramming is hard!', 0))
+	function_call = 'find_best_shift(wordlist, apply_shift(' + \
+		'\'Programming is hard!\', 0))'
+	expected_result = 0
+	received_result = find_best_shift(wordlist, \
+		apply_shift('Programming is hard!', 0))
+	
+	if expected_result == received_result:
+		success(function_call)
+	else:
+		fail(function_call, expected_result, received_result)
+
+
+def test_apply_shifts():
+
+	# test_apply_shifts('Do Androids Dream of Electric Sheep?, 
+	# 	[(0, 6), (3, 18), (12, 16)])
+	function_call = 'apply_shifts(\'Do Androids Dream of Electric' + \
+		'Sheep?\', [(0, 6), (3, 18), (12, 16)])'
+	expected_result = 'JufYkaolfapxQdrnzmasmRyrpfdvpmEurrb?'
+	received_result = apply_shifts('Do Androids Dream of Electric Sheep?', \
+		[(0, 6), (3, 18), (12, 16)])
+	
+	if expected_result == received_result:
+		success(function_call)
+	else:
+		fail(function_call, expected_result, received_result)
+
+	# test_apply_shifts('Hello, world!', [(0, 5), (2, 19), (7, 21)])
+	function_call = 'apply_shifts(\'Hello, world!\',' + \
+		'[(0, 5), (2, 19), (7, 21)])'
+	expected_result = 'Mjiil,xnficv!'
+	received_result = apply_shifts('Hello, world!', [(0, 5), (2, 19), (7, 21)])
+
+	if expected_result == received_result:
+		success(function_call)
+	else:
+		fail(function_call, expected_result, received_result)
+
+	# test_apply_shifts('Programming is fun!', [(0, 3), (7, 2), (11, 4)])
+	function_call = 'apply_shifts(\'Programming is fun!\', ' + \
+		'[(0, 3), (7, 2), (11, 4)])'
+	expected_result = 'Surjudprnsliraiocw!'
+	received_result = apply_shifts('Programming is fun!', \
+		[(0, 3), (7, 2), (11, 4)])
+	
+	if expected_result == received_result:
+		success(function_call)
+	else:
+		fail(function_call, expected_result, received_result)
 
 if __name__ == '__main__':
 
@@ -541,3 +617,14 @@ if __name__ == '__main__':
 	print purple('test_apply_shift()')
 	print purple('-----------------------------------------------------------')
 	test_apply_shift()
+
+	print purple('-----------------------------------------------------------')
+	print purple('test_find_best_shift()')
+	print purple('-----------------------------------------------------------')
+	test_find_best_shift()
+
+	print purple('-----------------------------------------------------------')
+	print purple('test_apply_shifts()')
+	print purple('-----------------------------------------------------------')
+	test_apply_shifts()
+
