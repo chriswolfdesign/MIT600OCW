@@ -356,6 +356,7 @@ def find_best_shifts(wordlist, text):
 	>>> print apply_shifts(s, shifts)
 	Do Androids Dream of Electric Sheep?
 	"""
+	return find_best_shifts_rec(wordlist, text, 0)
 
 def find_best_shifts_rec(wordlist, text, start):
 	"""
