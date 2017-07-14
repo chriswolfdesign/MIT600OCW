@@ -327,7 +327,6 @@ def apply_shifts(text, shifts):
 # Problem 4: Multi-level decryption.
 #
 
-
 def find_best_shifts(wordlist, text):
 	"""
 	Given a scrambled string, returns a shift key that will decode the text to
@@ -372,7 +371,35 @@ def find_best_shifts_rec(wordlist, text, start):
 	start: where to start looking at shifts
 	returns: list of tuples.  each tuple is (position in text, amount of shift)
 	"""
-	### TODO.
+	for number in range(CHARACTERS):
+		
+		#check the newest encryption
+		new_text = text[start:] + apply_shift(text[:start], number)
+
+		#look for spaces in the encrypted section of text
+		found_space = new_text[start:].find(' ')
+
+		#if space occurs after out starting point
+		if found_space > start:
+			
+			#if the text between the start and the space are viable words
+			if is_word(wordlist, new_text[start:found_space]):
+				next_check = find_best_shifts_rec(wordlist, new_text, \
+					found_space)
+
+				#if we find another list of encryption keys
+				if not next_check == None:
+					return [(found_space, number)].append(next_check)
+		
+		#if no spaces found
+		else:
+			
+			#if from start to end of string is a word
+			if is_word(wordlist, new_text[start:]):
+				return [(start, number)]
+	
+	#if this encryption cannot possibly contain an answer
+	return None
 
 
 def decrypt_fable():

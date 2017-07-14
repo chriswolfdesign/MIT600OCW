@@ -584,6 +584,14 @@ def test_apply_shifts():
 	else:
 		fail(function_call, expected_result, received_result)
 
+def test_find_best_shifts():
+	phrase = apply_shifts('Do Androids Dream of Electric Sheep?', \
+		[(0,6), (3,18), (12,16)])
+	print phrase
+	shifts = find_best_shifts(wordlist, phrase)
+	print shifts
+	print apply_shifts(phrase, shifts)
+
 if __name__ == '__main__':
 
 	print
@@ -628,3 +636,7 @@ if __name__ == '__main__':
 	print purple('-----------------------------------------------------------')
 	test_apply_shifts()
 
+	print purple('-----------------------------------------------------------')
+	print purple('test_find_best_shifts()')
+	print purple('-----------------------------------------------------------')
+	test_find_best_shifts()
