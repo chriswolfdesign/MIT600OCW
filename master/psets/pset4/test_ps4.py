@@ -585,12 +585,40 @@ def test_apply_shifts():
 		fail(function_call, expected_result, received_result)
 
 def test_find_best_shifts():
-	phrase = apply_shifts('Do Androids Dream of Electric Sheep?', \
-		[(0,6), (3,18), (12,16)])
-	print phrase
-	shifts = find_best_shifts(wordlist, phrase)
-	print shifts
-	print apply_shifts(phrase, shifts)
+	expected_result = 'Do Androids Dream of Electric Sheep?'
+	encrypted_text = apply_shifts('Do Androids Dream of Electric Sheep?', \
+		[(0, 6), (3, 18), (12, 16)])
+	correct_shifts = find_best_shifts(wordlist, encrypted_text)
+	received_result = apply_shifts(encrypted_text, correct_shifts)
+	function_call = 'Do Androids Dream of Electric Sheep?'
+
+	if expected_result == received_result:
+		success(function_call)
+	else:
+		fail(function_call, expected_result, received_result)
+
+	expected_result = 'I like Computer Science!'
+	encrypted_text = apply_shifts('I like Computer Science!', \
+		[(0, 5), (2, 16), (7, 12)])
+	correct_shifts = find_best_shifts(wordlist, encrypted_text)
+	received_result = apply_shifts(encrypted_text, correct_shifts)
+	function_call = 'I like Computer Science!'
+
+	if expected_result == received_result:
+		success(function_call)
+	else:
+		fail(function_call, expected_result, received_result)
+
+	expected_result = 'This homework has made me angry!'
+	encrypted_text = apply_shifts('This homework has made me angry!', [(0, 3), (5, 4), (14, 24), (18, 2)])
+	correct_shifts = find_best_shifts(wordlist, encrypted_text)
+	received_result = apply_shifts(encrypted_text, correct_shifts)
+	function_call = 'This homework has made me angry!'
+
+	if expected_result == received_result:
+		success(function_call)
+	else:
+		fail(function_call, expected_result, received_result)
 
 if __name__ == '__main__':
 

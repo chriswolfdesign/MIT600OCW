@@ -1,0 +1,11 @@
+-------------------------------------------------------------------------------
+find_best_shifts()
+-------------------------------------------------------------------------------
+
+- Uses global variables instead of returning as specified by assignment.
+
+- All words must have new encryption up until the final shift
+	(May be intended by specification)
+
+- Cannot use words that repeat a letter immediately
+	ex. 'Assignment" has two 's' in a row and therefore does not work

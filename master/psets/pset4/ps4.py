@@ -280,7 +280,7 @@ def find_best_shift(wordlist, text):
 	'Hello, world!'
 	"""
 	max_real_words = 0
-	best_shift     = 0
+	best_shift	   = 0
 
 	for number in range(CHARACTERS):
 		new_text = apply_coder(text, build_decoder(number))
@@ -355,7 +355,12 @@ def find_best_shifts(wordlist, text):
 	>>> print apply_shifts(s, shifts)
 	Do Androids Dream of Electric Sheep?
 	"""
-	return find_best_shifts_rec(wordlist, text, 0)
+
+	global shifts
+	shifts = []
+	find_best_shifts_rec(wordlist, text, 0)
+	shifts = [shift for shift in shifts if shift is not None]
+	return shifts
 
 def find_best_shifts_rec(wordlist, text, start):
 	"""
@@ -371,36 +376,29 @@ def find_best_shifts_rec(wordlist, text, start):
 	start: where to start looking at shifts
 	returns: list of tuples.  each tuple is (position in text, amount of shift)
 	"""
-	for number in range(CHARACTERS):
-		
-		#check the newest encryption
-		new_text = text[start:] + apply_shift(text[:start], number)
+	for shift in range(CHARACTERS):
+		decoded = apply_shift(text[start:], shift)
+		words = decoded.split(' ')
+		decoded = text[:start] + decoded
+		string_split = decoded.split()
+		size = len(string_split)
+		correct_words = 0
+		if is_word(wordlist, words[0]):
+			if not shift == 0:
+				shifts.append((start, shift))
+				new_start = start + len(words[0]) + 1
+				
+				if new_start >= len(text) - 1:
+					return
+				else:
+					shifts.append(find_best_shifts_rec(wordlist, decoded, new_start))
+					return
 
-		#look for spaces in the encrypted section of text
-		found_space = new_text[start:].find(' ')
-
-		#if space occurs after out starting point
-		if found_space > start:
-			
-			#if the text between the start and the space are viable words
-			if is_word(wordlist, new_text[start:found_space]):
-				next_check = find_best_shifts_rec(wordlist, new_text, \
-					found_space)
-
-				#if we find another list of encryption keys
-				if not next_check == None:
-					return [(found_space, number)].append(next_check)
-		
-		#if no spaces found
-		else:
-			
-			#if from start to end of string is a word
-			if is_word(wordlist, new_text[start:]):
-				return [(start, number)]
-	
-	#if this encryption cannot possibly contain an answer
-	return None
-
+			for word in string_split:
+				if is_word(wordlist, word):
+					correct_words += 1
+					if correct_words == size:
+						return 
 
 def decrypt_fable():
 	 """
@@ -413,9 +411,6 @@ def decrypt_fable():
 	returns: string - fable in plain text
 	"""
 	### TODO.
-
-
-
 	
 #What is the moral of the story?
 #
@@ -423,4 +418,3 @@ def decrypt_fable():
 #
 #
 #
-
